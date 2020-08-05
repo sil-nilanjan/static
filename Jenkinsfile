@@ -1,6 +1,11 @@
 pipeline {
     agent any
     stages {
+        stage ('Lint HTML') {
+            steps {
+                sh 'tidy -q -e *.html'
+            }
+        }
         stage ('Upload to AWS'){
             steps {
                 withEnv(["AWS_ACCESS_KEY_ID=${env.AWS_ACCESS_KEY_ID}",
